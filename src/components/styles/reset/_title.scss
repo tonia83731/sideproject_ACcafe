@@ -1,0 +1,9 @@
+.title {
+  margin-bottom: 1.5rem;
+  @include font-adjust(2em, 700, var(--main-title));
+}
+
+.second-title{
+  margin-bottom: 0.8rem;
+  @include font-adjust(1.2em, 700, var(--main-title));
+}

@@ -1,0 +1,49 @@
+:root{
+  --main-bg: #FEFEFE;
+  --main-title: #080808;
+  --main-subtitle: rgb(8, 8, 8, 0.8);
+  --main-body: rgb(8, 8, 8, 0.8);
+
+  // Banner
+  --banner-title: #373D20;
+  --banner-subtitle: #FEFEFE;
+
+  // News
+  --label-border: rgb(171, 172, 127, 0.8);
+  --label-bg-hover: rgb(171, 172, 127, 0.6);
+  --input-checked-bg: #717744;
+  --input-checked-font: #FEFEFE;
+
+  --list-bg-hover: rgb(8, 8, 8, 0.05);
+
+  // Membership
+  --break-border: rgb(171, 172, 127);
+  --member-input-border: rgb(171, 172, 127, 0.6);
+  --member-input-border-foucs: rgb(171, 172, 127);
+  --anchor-font: #717744;
+  --anchor-font-hover: #373D20;
+
+  // Header color
+  --header-bg: #373D20;
+  --header-font: #FEFEFE;
+  --nav-list-bg: rgb(171, 172, 127, 0.8);
+
+  // Footer
+  --footer-bg: #373D20;
+  --footer-font: #FEFEFE;
+  --subscribe-input: rgb(8, 8, 8, 0.6);
+  --subscribe-btn: #080808;
+
+  // Button color
+  --default-btn-bg: #717744;
+  --default-btn-bg-hover: #373D20;
+  --default-btn-font: #FEFEfE;
+
+  --member-submit-btn: rgb(8, 8, 8, 0.6);
+  --member-submit-btn-bg: rgb(171, 172, 127, 0.6);
+  --member-submit-btn-bg-hover: #717744;
+  --member-submit-btn-hover: #FEFEfE;
+
+  --facebook-btn-bg: #3B5998;
+  --line-btn-bg: #08C656;
+}

@@ -1,0 +1,20 @@
+@import './mixin';
+
+.btn {
+  border: none;
+  border-radius: 0.25em;
+  font-size: 0.75em;
+  padding: 0.25em 0.75em;
+}
+
+.default-btn {
+  background-color: var(--default-btn-bg);
+  color: var(--default-btn-font);
+  transition: all 0.1s linear;
+
+  &:hover {
+    @include shadow;
+    background-color: var(--default-btn-bg-hover);
+    
+  }
+}

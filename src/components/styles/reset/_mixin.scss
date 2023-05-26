@@ -1,0 +1,40 @@
+// font settings
+@mixin font-adjust($size, $weight, $color) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  @content;
+}
+
+// social media icon settings
+@mixin svg-adjust($width, $height, $color) {
+  svg {
+    width: $width;
+    height: $height;
+    // background-color: transparent;
+
+    path {
+      fill: $color;
+    }
+
+    // &:hover {
+    //   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    // }
+  }
+}
+
+@mixin shadow(){
+  /* shadow */
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(87, 87, 87, 1);
+  -moz-box-shadow: 0px 1px 5px 0px rgba(87, 87, 87, 1);
+  box-shadow: 0px 1px 5px 0px rgba(87, 87, 87, 1);
+}
+
+// cover background settngs
+// @mixin cover-bg($width, $height, $radius) {
+//   width: $width;
+//   height: $height;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   border-radius: 10px;
+// }

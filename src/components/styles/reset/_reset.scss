@@ -1,0 +1,114 @@
+// font type
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/*
+font-family: 'Lora', serif;
+font-family: 'Montserrat', sans-serif; 
+*/
+
+// ** reset starts here ***
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--main-bg);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+// Font Adjust (default)
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Lora', serif;
+  line-height: 1;
+  margin: 0;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+p {
+  font-size: 1em;
+  margin: 0;
+}
+
+.caption {
+  font-size: 0.75em;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+/* section > .container */
+.container {
+  width: 85%;
+  height: auto;
+  max-width: 1200px;
+  margin: 2rem auto 1.5rem;
+}
+
+/* background image */
+.background-img {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* title */
+.title {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+
+@media screen and (min-width: 600px) {
+  body {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  body {
+    font-size: 20px;
+  }
+}

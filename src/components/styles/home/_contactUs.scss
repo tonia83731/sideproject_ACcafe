@@ -1,0 +1,35 @@
+.contact-us-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 200px 1fr;
+  grid-gap: 1em;
+  grid-template-areas:
+    "image image"
+    "content content";
+  .contact-us-img{
+    grid-area: image;
+    background-image: url("https://images.unsplash.com/photo-1511667282954-8957078364a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=381&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .contact-us-group{
+    grid-area: content;
+    .shop-list{
+      margin-bottom: 1em;
+      .shop-item{
+        margin-left: 1em;
+        @include font-adjust(0.75em, 400, var(--main-body));
+        @include svg-adjust(0.75em, auto, var(--main-body));
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .contact-us-container {
+    grid-template-areas:
+      "image content"
+      "image content";
+  }
+}

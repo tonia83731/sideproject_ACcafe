@@ -1,0 +1,69 @@
+.site-header{
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  background-color: var(--header-bg);
+  color: var(--header-font);
+  text-align: center;
+  padding: 0 1em;
+
+  position: fixed;
+  z-index: 999;
+
+  display: grid;
+  grid-template-columns: 15% auto 5% 5% 5%;
+  grid-gap: 0.5rem;
+
+  .nav-toggle{
+    display: none;
+    &:checked~nav{
+      transform: scale(1, 1);
+      .nav-item{
+        opacity: 1;
+      }
+    }
+  }
+  .nav-toggle-label{
+    grid-column: 1/2;
+    @include svg-adjust(auto, 20px, var(--header-font));
+  }
+
+  .brand-title {
+    grid-column: 2/3;
+    line-height: 45px;
+    color: var(--header-font);
+  }
+
+  nav{
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    background-color: var(--nav-list-bg);
+  
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 0.2s ease-out;
+    .nav-item{
+      opacity: 0;
+      margin: 0.5em 1em;
+      font-size: 1em;
+      .nav-link{
+        color: var(--header-font);
+      }
+    }
+  }
+  .nav-icon{
+    @include svg-adjust(auto,20px, var(--header-font));
+  }
+  .member {
+    grid-column: 3/4;
+  }
+
+  .wish {
+    grid-column: 4/5;
+  }
+
+  .cart {
+    grid-column: 5/6;
+  }
+}
