@@ -4,9 +4,12 @@
 @import './reset/mixin';
 @import './reset/title';
 
+@import './reset/pagination';
+
 @import './header';
 
 @import './home/home';
+@import './menu/menu';
 @import './news';
 
 @import './login';

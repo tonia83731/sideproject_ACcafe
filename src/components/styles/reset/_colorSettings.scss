@@ -8,6 +8,13 @@
   --banner-title: #373D20;
   --banner-subtitle: #FEFEFE;
 
+  // Cart
+  --cart-bg: rgb(171, 172, 127, 0.6);
+  --quantity-btn-font: #373D20;
+  --sum-bg: rgb(254, 254, 254, 0.6);
+  --sum-hr: rgb(113, 119, 68, 0.6);
+  --sum-submit-btn-font: rgb(8, 8, 8, 0.6);
+
   // News
   --label-border: rgb(171, 172, 127, 0.8);
   --label-bg-hover: rgb(171, 172, 127, 0.6);
@@ -43,6 +50,24 @@
   --member-submit-btn-bg: rgb(171, 172, 127, 0.6);
   --member-submit-btn-bg-hover: #717744;
   --member-submit-btn-hover: #FEFEfE;
+
+  --mode-btn-bg:rgb(171, 172, 127, 0.6);
+  --mode-btn-font: rgb(8, 8, 8, 0.6);
+  --mode-btn-bg-hover: rgb(113, 119, 68, 0.6);
+  --mode-btn-font-hover: #FEFEFE;
+  --mode-btn-bg-checked: #717744;
+
+  --wish-btn-bg: #ABAC7F;
+  --wish-btn-font: rgb(254, 254, 254, 0.6);
+  --wish-btn-font-hover: #530000;
+  --wish-btn-bg-hover: #717744;
+
+  // Pagination
+  --page-border: rgb(171, 172, 127, 0.6);
+  --page-font: #373D20;
+  --page-selected-bg: #717744;
+  --page-selected-font: #FEFEfE;
+
 
   --facebook-btn-bg: #3B5998;
   --line-btn-bg: #08C656;

@@ -1,0 +1,31 @@
+.pagination{
+  padding: 1em 0;
+  .page-list{
+    display: flex;
+    justify-content: center;
+    .page-item{
+      width: 2rem;
+      height: 2rem;
+      text-align: center;
+      line-height: 2rem;
+      border: 1px solid var(--page-border);
+
+      transition: all 0.1s linear;
+      .page-link {
+        @include font-adjust(0.75em, 400, var(--page-font));
+      }
+      &.selected{
+        background-color: var(--page-selected-bg);
+        color: var(--page-selected-font);
+        /* shadow */
+        -webkit-box-shadow: 0px 1px 5px 0px rgba(87, 87, 87, 1);
+        -moz-box-shadow: 0px 1px 5px 0px rgba(87, 87, 87, 1);
+        box-shadow: 0px 1px 5px 0px rgba(87, 87, 87, 1);
+      }
+      &:hover {
+        background-color: var(--page-border);
+      }
+      
+    }
+  }
+}

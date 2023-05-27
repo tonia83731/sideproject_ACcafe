@@ -1,7 +1,7 @@
 import Home from './Home/Home'
 import News from './News'
 import Login from './Login'
-
+import Menu from './Menu/Menu'
 
 
 export default function Main(){
@@ -9,8 +9,9 @@ export default function Main(){
     <main>
       <div className="main-container">
         {/* <Home/> */}
+        <Menu/>
         {/* <News/> */}
-        <Login/>
+        {/* <Login/> */}
       </div>
     </main>
   )
