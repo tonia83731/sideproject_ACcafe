@@ -29,6 +29,10 @@ body {
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 // Font Adjust (default)

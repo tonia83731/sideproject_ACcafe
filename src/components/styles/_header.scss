@@ -5,18 +5,18 @@
   background-color: var(--header-bg);
   color: var(--header-font);
   text-align: center;
-  padding: 0 1em;
-
+  
   position: fixed;
+  top: 0;
   z-index: 999;
 
   display: grid;
-  grid-template-columns: 15% auto 5% 5% 5%;
+  grid-template-columns: 2em 15% auto 10% 2em;
   grid-gap: 0.5rem;
-
+  align-items: center;
   .nav-toggle{
     display: none;
-    &:checked~nav{
+    &:checked~nav {
       transform: scale(1, 1);
       .nav-item{
         opacity: 1;
@@ -24,16 +24,12 @@
     }
   }
   .nav-toggle-label{
-    grid-column: 1/2;
-    @include svg-adjust(auto, 20px, var(--header-font));
-  }
-
-  .brand-title {
     grid-column: 2/3;
-    line-height: 45px;
     color: var(--header-font);
   }
-
+  .brand-title{
+    grid-column: 3/4;
+  }
   nav{
     position: absolute;
     width: 100%;
@@ -52,18 +48,71 @@
       }
     }
   }
-  .nav-icon{
-    @include svg-adjust(auto,20px, var(--header-font));
-  }
-  .member {
-    grid-column: 3/4;
-  }
-
-  .wish {
+  .nav-icon-list{
     grid-column: 4/5;
-  }
 
-  .cart {
-    grid-column: 5/6;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.3em;
+    
+    .nav-icon {
+      @include svg-adjust(auto, 1em, var(--header-font));
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .site-header {
+    height: 60px;
+    line-height: 60px;
+
+    display: grid;
+    grid-template-columns: 2em 3fr 4fr 0.8fr 2em;
+    grid-gap: 0.5rem;
+    align-items: center;
+
+    .nav-toggle {
+      display: none;
+
+      &:checked~nav {
+        transform: scale(1, 1);
+
+        .nav-item {
+          opacity: 1;
+        }
+      }
+    }
+
+    .nav-toggle-label {
+      display: none;
+    }
+
+    .brand-title {
+      text-align: left;
+      grid-column: 2/3;
+    }
+
+    nav {
+      all: unset;
+      grid: 3/4;
+      
+      .nav-list{
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 1em;
+        .nav-item{
+          all: unset;
+          font-size: 1em
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .site-header {
+    grid-template-columns: 3em 3fr 4fr 0.8fr 3em;
   }
 }
