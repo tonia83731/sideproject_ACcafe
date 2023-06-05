@@ -1,3 +1,4 @@
+import {useState} from 'react'
 
 const newsOptionData = [
   {
@@ -92,11 +93,11 @@ const dummyNewsData = [
   },
 ]
 
-function BtnGroup(){
+function BtnGroup({onChange}){
  const newsOptionItems = newsOptionData.map((item, index) => {
     return(
       <>
-      <input type="radio" className="news-input" name="news" id={item.id} value={item.id} defaultChecked={item.id === "all"}/>
+      <input type="radio" className="news-input" name="news" id={item.id} value={item.id} defaultChecked={item.id === "all"} onChange={onChange}/>
       <label htmlFor={item.id} className="news-label">{item.name}</label>
       </>
     )
@@ -108,8 +109,8 @@ function BtnGroup(){
   )
 }
 
-function NewsGroupList() {
-  const newsItems = dummyNewsData.map((item) => {
+function NewsGroupList({data}) {
+  const newsItems = data.map((item) => {
     return(
       <li className="news-item" key={item.id}>
         <a href="" className="news-item-title">{item.title}</a>
@@ -126,14 +127,23 @@ function NewsGroupList() {
 
 
 export default function News() {
+  const [type, setType] = useState(dummyNewsData);
+
+  const handleTypeChange = (e) => {
+    const newsType = dummyNewsData.filter(data => data.type.includes(e.target.value))
+
+    if(e.target.value === "all") return setType(dummyNewsData)
+    // console.log(newsType)
+    return setType(newsType)
+  }
   return(
     <section className="news">
       <div className="news-container">
         <div className="news-img"></div>
         <div className="news-body">
-          <BtnGroup/>
+          <BtnGroup onChange={handleTypeChange}/>
           <div className="news-group">
-            <NewsGroupList/>
+            <NewsGroupList data={type}/>
           </div>
         </div>
       </div>

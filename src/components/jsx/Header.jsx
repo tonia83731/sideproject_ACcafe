@@ -9,6 +9,8 @@ import {ReactComponent as ColdDrink} from '../assets/icon/menu/cold_drink.svg'
 import {ReactComponent as HotDrink} from '../assets/icon/menu/hot_drink.svg'
 import {ReactComponent as Soup} from '../assets/icon/menu/soup.svg'
 
+import { Link } from 'react-router-dom';
+
 const navData = [
   {
     id: 1,
@@ -145,7 +147,8 @@ function BagDropDown() {
         <li className="dropdown-header">Bag List</li>
           {bagItem}
         <li className="dropdown-footer">
-          <button type="button" className="dropdown-btn cursor-pointer btn">To shopping bag</button>
+          {/* <Link to="#cart" className="dropdown-btn cursor-pointer btn">To shopping bag</Link> */}
+          <a href="#cart" className="dropdown-btn cursor-pointer btn">To shopping bag</a>
         </li>
       </ul>
     </div>

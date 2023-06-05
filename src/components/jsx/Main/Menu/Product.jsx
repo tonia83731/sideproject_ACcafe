@@ -1,30 +1,73 @@
 import {ReactComponent as Grid} from '../../../assets/icon/menu/grid.svg'
 import {ReactComponent as List} from '../../../assets/icon/menu/Vector.svg'
 import { UnorderList } from '../../Header'
-import {useContext} from 'react'
-import { ProductMenuGrid, ProductMenuList } from '../../Data/MenuData'
+import {useState, useContext} from 'react'
+import { ProductMenu, ProductSearch, ProductData } from '../../Data/MenuData'
+// import { ProductData } from '../../Data/MenuData'
 
 
 
 
 
 
-const pages = [1,2,3,4,5]
+// const pages = [1,2,3,4,5]
 
-export function Pagination(){
-  return(
-    <ul className="page-list">
-      <li className="page-item"><a href="" className="page-link prev">❮</a></li>
-      {pages.map((page) => {
-        return(<li className={`page-item ${page === 1? "selected" : ""}`} key={page}><a href="" className="page-link">{page}</a></li>)
-      })}
-      <li className="page-item"><a href="" className="page-link next">❯</a></li>
-    </ul>
-  )
-}
+
 
 
 export default function Product() {
+  const[mode, setMode] = useState('grid')
+  const[searchValue, setSearchValue] = useState('')
+  const[showData, setShowData] = useState(ProductData)
+
+  const[quantityCount, setQuantityCount] = useState(0)
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const recordsPerPage = 4
+  const lastIndex = currentPage * recordsPerPage
+  const firstIndex = lastIndex - recordsPerPage
+  const record = showData.slice(firstIndex, lastIndex)
+  const npage = Math.ceil(showData.length / recordsPerPage)
+  const numbers = [...Array(npage + 1).keys()].slice(1)
+
+  const handleModeSwitch = (e) => {
+    if(e.target.matches('#grid')){
+      setMode('grid')
+    } else if (e.target.matches('#list')){
+      setMode('list')
+    }
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const filterData = showData.filter(item => item.name.toLowerCase().includes(searchValue))
+    console.log(filterData)
+    // if(filterData.length === 0) return
+    if(filterData.length === 0) return setShowData(ProductData)
+    setSearchValue('') 
+    return setShowData(filterData)
+  }
+  const handlePrevClickPage = () => {
+    if(currentPage !== 1){
+      return setCurrentPage(currentPage - 1)
+    }
+  }
+  const handleNextClickPage = () => {
+    if(currentPage !== npage){
+      return setCurrentPage(currentPage + 1)
+    }
+  }
+  const handleActionPage = (id) => {
+    setCurrentPage(id)
+  }
+
+  const handleQuantityClick = (e) => {
+    if(e.target.matches('#minus')){
+      if(quantityCount !== 0) return setQuantityCount(quantityCount-1)
+    } else if(e.target.matches('#plus')){
+      return setQuantityCount(quantityCount+1)
+    }
+  }
+  
   return(
     <section className="product">
       <div className="product-container">
@@ -32,29 +75,39 @@ export default function Product() {
         <div className="product-body">
           <div className="product-control">
             <div className="mode">
-              <input type="radio" className="grid" id="grid" name="mode"  value="grid" defaultChecked/>
-              <label htmlFor="grid" className="grid mode-btn"data-mode="grid">
+              <input type="radio" className="grid" id="grid" name="mode"  value="grid" defaultChecked onClick={handleModeSwitch}/>
+              <label htmlFor="grid" className="grid mode-btn" data-mode="grid">
                 <Grid/>
               </label>
-              <input type="radio" className="list" id="list" name="mode" value="list"/>
+              <input type="radio" className="list" id="list" name="mode" value="list" onClick={handleModeSwitch}/>
               <label htmlFor="list" className="list mode-btn"data-mode="list">
                 <List/>
               </label>
             </div>
-            <div className="product-search">
-              <input type="text" className="search-input" placeholder="Type in keywords here..."/>
-              <button type="submit" className="search-btn btn">Search</button>
-            </div>
+            <ProductSearch value={searchValue} onSubmit={handleSubmit} onChange={(e) => setSearchValue(e.target.value)}/>
           </div>
           <section className="product-menu">
-            {/* <ProductMenuGrid/> */}
-            <ProductMenuList/>
+            <ProductMenu phase={mode} data={record} onClick={handleQuantityClick} quantity={quantityCount}/>
+            {/* <ProductMenuList/> */}
           </section>
           <div className="pagination">
-            <Pagination/>
+            <Pagination data={numbers} onActive={handleActionPage} prevClick={handlePrevClickPage} nextClick={handleNextClickPage} currentPage={currentPage}/>
           </div>
         </div>
       </div>
     </section>
   )
 } 
+
+export function Pagination({data, onActive, prevClick, nextClick, currentPage}){
+  const page = data.map((page) => {
+    return(<li className={`page-item ${currentPage === page ? "selected" : ""}`} key={page} data-page={page}><a href="#" className="page-link" onClick={() => onActive(page)}>{page}</a></li>)
+  })
+  return(
+    <ul className="page-list">
+      <li className="page-item"><a href="#" className="page-link prev" onClick={prevClick}>❮</a></li>
+      {page}
+      <li className="page-item"><a href="#" className="page-link next" onClick={nextClick}>❯</a></li>
+    </ul>
+  )
+}

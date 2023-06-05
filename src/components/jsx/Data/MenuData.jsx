@@ -7,6 +7,8 @@ import {ReactComponent as Soup} from '../../assets/icon/menu/soup.svg'
 import {QuantityCount} from '../Main/Menu/Cart'
 import {ReactComponent as Like} from '../../assets/icon/nav_icon/like_save.svg'
 
+import {useState} from 'react'
+
 export const ProductData = [
   {
     id: 1,
@@ -299,57 +301,106 @@ export const ProductData = [
 
 ];
 
-export function ProductMenuGrid(){
+
+// function ProductMenuGridItem(){
+//   return(
+//     <div class="product-card">
+//       <img
+//         src={item.imgUrl}
+//         alt={item.name} class="product-img"/>
+//       <div className="card-body">
+//         <h5 className="product-title">{item.class} {item.name}</h5>
+//         <p className="product-price">$ {item.price}</p>
+//       </div>
+//       <div className="card-quantity">
+//         <QuantityCount/>
+//       </div>
+//       <div className="card-btn">
+//         <button className="btn default-btn add-cart-btn">Add to Cart</button>
+//         <button className="btn wish-btn"><Like/></button>
+//       </div>
+//     </div>
+//   )
+// }
+
+function ProductMenuGrid({data, onClick, quantity}){
+  const productGrid = data.map((item) => {
+    return(
+      <div class="product-card" key={item.id}>
+        <img
+          src={item.imgUrl}
+          alt={item.name} class="product-img"/>
+        <div className="card-body">
+          <h5 className="product-title">{item.class} {item.name}</h5>
+          <p className="product-price">$ {item.price}</p>
+        </div>
+        <div className="card-quantity">
+          <QuantityCount onClick={onClick} quantity={quantity}/>
+        </div>
+        <div className="card-btn">
+          <button className="btn default-btn add-cart-btn">Add to Cart</button>
+          <button className="btn wish-btn"><Like/></button>
+        </div>
+      </div>
+)
+  })
   return(
-    <div className="data-panel" id="data-panel" data-mode="grid">
-      {ProductData.map((item) => {
-        return(
-          <div class="product-card">
-            <img
-              src={item.imgUrl}
-              alt={item.name} class="product-img"/>
-            <div className="card-body">
-              <h5 className="product-title">{item.class} {item.name}</h5>
-              <p className="product-price">$ {item.price}</p>
-            </div>
-            <div className="card-quantity">
-              <QuantityCount/>
-            </div>
-            <div className="card-btn">
-              <button className="btn default-btn add-cart-btn">Add to Cart</button>
-              <button className="btn wish-btn"><Like/></button>
-            </div>
+    <>
+      {productGrid}
+    </>
+  )
+}
+
+function ProductMenuList({data, onClick, quantity}){
+  const productList = data.map((item) => {
+    return(
+      <div class="product-list" key={item.id}>
+        <div className="product-item">
+          <div className="product-basic-info">
+            <h5 className="product-title">{item.class} {item.name}</h5>
+            <p className="product-price">$ {item.price}</p>
           </div>
-        )
-      })}
+          <div className="product-btn-group">
+            <div className="product-add-quantity">
+              <div className="list-quantity">
+                <QuantityCount onClick={onClick} quantity={quantity}/>
+              </div>
+              <button className="btn default-btn add-cart-btn">Add to Cart</button>
+            </div>
+            <button className="btn wish-btn"><Like/></button>
+          </div>
+        </div>
+      </div>
+    )
+  })
+  return (
+    <>
+      {productList}
+    </>
+  )
+}
+
+function ProductMenuMode({phase, data, onClick, quantity}){
+  if(phase === 'grid'){
+    return <ProductMenuGrid data={data} onClick={onClick} quantity={quantity}/>
+  } else {
+    return <ProductMenuList data={data} onClick={onClick} quantity={quantity}/>
+  }
+}
+
+export function ProductMenu({phase, data, onClick, quantity}){
+  return(
+    <div className="data-panel" id="data-panel" data-mode={phase}>
+      <ProductMenuMode phase={phase} data={data} onClick={onClick} quantity={quantity}/>
     </div>
   )
 }
 
-export function ProductMenuList(){
-  return (
-    <div className="data-panel" id="data-panel" data-mode="list">
-      {ProductData.map((item) => {
-        return(
-          <div class="product-list">
-            <div className="product-item">
-              <div className="product-basic-info">
-                <h5 className="product-title">{item.class} {item.name}</h5>
-                <p className="product-price">$ {item.price}</p>
-              </div>
-              <div className="product-btn-group">
-                <div className="product-add-quantity">
-                  <div className="list-quantity">
-                    <QuantityCount/>
-                  </div>
-                  <button className="btn default-btn add-cart-btn">Add to Cart</button>
-                </div>
-                <button className="btn wish-btn"><Like/></button>
-              </div>
-            </div>
-          </div>
-        )
-      })}
-    </div>
+export function ProductSearch({onChange, onSubmit, value}){
+  return(
+    <form className="product-search" onSubmit={onSubmit}>
+      <input type="text" className="search-input" placeholder="Type in keywords here..." onChange={onChange} value={value}/>
+      <button type="submit" className="search-btn btn">Search</button>
+    </form>
   )
 }

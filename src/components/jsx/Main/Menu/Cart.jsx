@@ -1,17 +1,17 @@
+import {useState} from 'react'
 
-
-export function QuantityCount(){
+export function QuantityCount({onClick, quantity}){
   return(
     <>
-      <span className="quantity-btn minus cursor-pointer">-</span>
-      <input type="number" className="quantity-count" placeholder="1"/>
-      {/* <span className="quantity-count">1</span> */}
-      <span className="quantity-btn cursor-pointer">+</span>
+      <button className="quantity-btn minus cursor-pointer" id="minus" onClick={onClick}>-</button>
+      <span className="quantity-count">{quantity}</span>
+      {/* <input type="text" className="quantity-count" placeholder={quantity} disabled/> */}
+      <button className="quantity-btn plus cursor-pointer" id="plus" onClick={onClick}>+</button>
     </>
   )
 }
 
-function ShoppingBagItem({className}){
+function ShoppingBagItem({className, onClick, quantity}){
   return(
     <li className={`${className}-item`} data-count="0" data-price="150">
       <div>
@@ -19,7 +19,7 @@ function ShoppingBagItem({className}){
         <div className={`${className}-item-body`}>
           <p className={`${className}-item-price`}>$ 150</p>
           <div className={`${className}-item-quantity`}>
-            <QuantityCount/>
+            <QuantityCount onClickMinus={onClick}  quantity={quantity}/>
           </div>
           <p className={`${className}-item-total-price`}>$ 150</p>
         </div>
@@ -30,15 +30,25 @@ function ShoppingBagItem({className}){
 }
 
 export default function Cart(){
+  const [quantity, setQuantity] = useState(0)
+
+  const handleQuantityClickMinus = () => {
+    if(quantity !== 0){
+      setQuantity(quantity-1)
+    }
+  }
+  const handleQuantityClickPlus = () => {
+    setQuantity(quantity+1)
+  }
   return(
-    <section className="cart">
+    <section className="cart" id="cart">
       <div className="cart-container">
         <h3 className="cart-title title">Shopping Bag</h3>
         <div className="cart-body">
           <section className="shopping-bag">
             <div className="shopping-bag-container">
               <ul className="shopping-bag-list">
-                <ShoppingBagItem className="shopping-bag"/>
+                <ShoppingBagItem className="shopping-bag" quantity={quantity}/>
               </ul>
             </div>
           </section>

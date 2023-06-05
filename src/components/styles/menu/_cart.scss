@@ -92,21 +92,18 @@
 }
 
 .quantity-count{
-  min-width: 35px;
-  width: 50%;
+  min-width: 40px;
+  width: 100%;
   // margin: auto 0;
+  padding: 0 2em;
   text-align: center;
   border: 1px solid var(--cart-bg);
   border-radius: 5px;
   @include font-adjust(1em, 400, var(--quantity-btn-font));
-  &:focus{
-    border: 1px solid var(--quantity-btn-font);
-  }
-  &::placeholder{
-    @include font-adjust(0.75em, 400, var(--cart-bg));
-  }
 }
 .quantity-btn{
+  border: none;
+  background-color: transparent;
   @include font-adjust(1.5em, 500, var(--quantity-btn-font));
   padding: 0 0.5em;
 }
