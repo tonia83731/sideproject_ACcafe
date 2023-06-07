@@ -2,16 +2,7 @@ import {ReactComponent as Grid} from '../../../assets/icon/menu/grid.svg'
 import {ReactComponent as List} from '../../../assets/icon/menu/Vector.svg'
 import { UnorderList } from '../../Header'
 import {useState, useContext} from 'react'
-import { ProductMenu, ProductSearch, ProductData } from '../../Data/MenuData'
-// import { ProductData } from '../../Data/MenuData'
-
-
-
-
-
-
-// const pages = [1,2,3,4,5]
-
+import { ProductMenu, ProductSearch, ProductData, MenuContext } from '../../Data/MenuData'
 
 
 
@@ -19,8 +10,9 @@ export default function Product() {
   const[mode, setMode] = useState('grid')
   const[searchValue, setSearchValue] = useState('')
   const[showData, setShowData] = useState(ProductData)
-
-  const[quantityCount, setQuantityCount] = useState(0)
+  // const[itemQuantity, setItemQuantity] = useState(ProductData)
+  const MenuData = useContext(MenuContext)
+  const[quantityCounts, setQuantityCounts] = useState(MenuData)
 
   const [currentPage, setCurrentPage] = useState(1)
   const recordsPerPage = 4
@@ -60,14 +52,33 @@ export default function Product() {
     setCurrentPage(id)
   }
 
-  const handleQuantityClick = (e) => {
-    if(e.target.matches('#minus')){
-      if(quantityCount !== 0) return setQuantityCount(quantityCount-1)
-    } else if(e.target.matches('#plus')){
-      return setQuantityCount(quantityCount+1)
-    }
+  const handlePlusQuantity = (id) => {
+    setQuantityCounts(
+      quantityCounts.map(quantityCount => {
+        if(quantityCount.id === id){
+          return{
+            ...quantityCount,
+            quantity: quantityCount + 1
+          }
+        }
+        return quantityCounts
+      })
+    )
   }
-  
+  const handleMinusQuantity = (id) => {
+    setQuantityCounts(
+      quantityCounts.map(quantityCount => {
+        if(quantityCount.id === id && quantityCount.quantity > 0){
+          return{
+            ...quantityCount,
+            quantity: quantityCount - 1
+          }
+        }
+        return quantityCounts
+      })
+    )
+  }
+
   return(
     <section className="product">
       <div className="product-container">
@@ -87,7 +98,7 @@ export default function Product() {
             <ProductSearch value={searchValue} onSubmit={handleSubmit} onChange={(e) => setSearchValue(e.target.value)}/>
           </div>
           <section className="product-menu">
-            <ProductMenu phase={mode} data={record} onClick={handleQuantityClick} quantity={quantityCount}/>
+            <ProductMenu phase={mode} data={record} onClickPlus={handlePlusQuantity} onClickMinus={handleMinusQuantity}/>
             {/* <ProductMenuList/> */}
           </section>
           <div className="pagination">

@@ -76,11 +76,12 @@
     margin-top: 1em;
     padding: 0.3em;
     .product-item{
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      // justify-content: space-between;
       align-items: center;
       .product-basic-info{
-        width: 70%;
+        width: 60%;
         .product-title {
             font-family: 'Montserrat', sans-serif;
             @include svg-adjust(0.8em, auto, var(--main-body));
@@ -92,8 +93,11 @@
         }
       }
       .product-btn-group{
-        display: flex;
-        justify-content: space-between;
+        // width: 40%;
+        display: grid;
+        grid-template-columns: 2fr 0.5fr;
+        grid-gap: 1em;
+        justify-content: center;
         align-items: center;
         .product-add-quantity{
           display: flex;
@@ -103,21 +107,34 @@
           // width: 100%;
           .list-quantity{
             // width: 50%;
+            display: flex;
+            justify-content: space-between;
             text-align: center;
-            .quantity-count{
-              width: 30%;
+            .list-quantity-count {
+              border: 1px solid var(--cart-bg);
+              border-radius: 5px;
+              @include font-adjust(1em, 400, var(--quantity-btn-font));
+              padding: 0 2em;
+            }
+            
+            .list-quantity-btn {
+              border: none;
+              background-color: transparent;
+              @include font-adjust(1.5em, 500, var(--quantity-btn-font));
             }
           }
           .add-cart-btn{
             // height: 2em;
             // min-width: 80px;
-            width: 80%;
-            margin: auto 0;
+            width: 100%;
+            margin-top: 1em;
+            // margin: auto 0;
           }
         }
         .wish-btn{
           height: 2em;
           margin: auto 0;
+          // margin-left: 0.5em;
           background-color: var(--wish-btn-bg);
           @include svg-adjust(1em, auto, var(--wish-btn-font));
         
@@ -214,26 +231,36 @@
   .data-panel[data-mode="list"] {
     .product-list {
       .product-item { 
+        grid-template-columns: 1fr 2fr;
         .product-btn-group {
           .product-add-quantity {
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-around;
-            padding-right: 1em;
+            // flex-direction: row;
+            // align-items: center;
+            // justify-content: space-around;
+            // padding-right: 1em;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            grid-gap: 1em;
             // width: 100%;
             .list-quantity {
               // width: 50%;
               text-align: end;
-              .quantity-count {
-                width: 50%;
+              .list-quantity-count {
+                padding: 0 1em;
+              }
+              
+              .list-quantity-btn {
               }
             }
 
             .add-cart-btn {
               height: 2em;
+              // margin-top: 0;
+              width: 80%;
+              margin: 0 auto;
               // min-width: 80px;
-              width: 60%;
-              margin: auto 0;
+              // width: 60%;
+              // margin: auto 0;
             }
           }
         }
@@ -253,6 +280,40 @@
 @media screen and (min-width: 960px) {
   .data-panel[data-mode="grid"] {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .data-panel[data-mode="list"] {
+    .product-list {
+      .product-item {
+        grid-template-columns: 2fr 1.5fr;
+
+        .product-btn-group {
+          .product-add-quantity {
+
+            .list-quantity {
+              // width: 50%;
+              text-align: end;
+
+              .list-quantity-count {
+                padding: 0 2em;
+              }
+
+              .list-quantity-btn {}
+            }
+
+            .add-cart-btn {
+              height: 2em;
+              width: 100%;
+              // margin-top: 0;
+              // width: 60%;
+              // margin: 0 auto;
+              // min-width: 80px;
+              // width: 60%;
+              // margin: auto 0;
+            }
+          }
+        }
+      }
+    }
   }
   .product-control{
     .product-search{

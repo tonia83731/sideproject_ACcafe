@@ -1,12 +1,11 @@
 import {useState} from 'react'
 
-export function QuantityCount({onClick, quantity}){
+export function QuantityCount({onClickMinus, onClickPlus, quantity}){
   return(
     <>
-      <button className="quantity-btn minus cursor-pointer" id="minus" onClick={onClick}>-</button>
+      <button className="quantity-btn minus cursor-pointer" id="minus" onClick={onClickMinus}>-</button>
       <span className="quantity-count">{quantity}</span>
-      {/* <input type="text" className="quantity-count" placeholder={quantity} disabled/> */}
-      <button className="quantity-btn plus cursor-pointer" id="plus" onClick={onClick}>+</button>
+      <button className="quantity-btn plus cursor-pointer" id="plus" onClick={onClickPlus}>+</button>
     </>
   )
 }
