@@ -1,4 +1,6 @@
 import {useState} from 'react'
+import { dummyNewsData } from '../Data/NewsData';
+import { Pagination } from './Menu/Product';
 
 const newsOptionData = [
   {
@@ -27,78 +29,12 @@ const newsOptionData = [
   },
 ]
 
-const dummyNewsData = [
-  {
-    id: 1,
-    title: "Let's Celebrate AC's 3rd Anniversary",
-    type: "all",
-    publish_date: "2023 February 9",
-    date: "2023 July 2",
-    location: "All branch",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in enim in lectus eleifend maximus."
-  },
-  {
-    id: 2,
-    title: "Become Our Gloden Member",
-    type: "membership",
-    publish_date: "2023 February 9",
-    date: "2023 July 4",
-    location: "All branch",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in enim in lectus eleifend maximus."
-  },
-  {
-    id: 3,
-    title: "New Branch Launched: Hong Kong is our first step being worldwid",
-    type: "branch",
-    publish_date: "2023 February 18",
-    date: "2023 August 4",
-    location: "Branch",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in enim in lectus eleifend maximus."
-  },
-  {
-    id: 4,
-    title: "Disney have Partnered with AC Cafe' to Launch a New Signature Meal Order!",
-    type: "collaboration",
-    publish_date: "2023 February 9",
-    date: "2023 September 11",
-    location: "All branch",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in enim in lectus eleifend maximus."
-  },
-  {
-    id: 5,
-    title: "Happy Summer Holiday! Buy One Get One Free.",
-    type: "all",
-    publish_date: "2023 February 9",
-    date: "2023 September 12",
-    location: "All branch",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in enim in lectus eleifend maximus."
-  },
-  {
-    id: 6,
-    title: "New Product Released! Get 30%off for the Tasty Berry Party Set",
-    type: "all",
-    publish_date: "2023 February 9",
-    date: "2023 September 27",
-    location: "All branch",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in enim in lectus eleifend maximus."
-  },
-  {
-    id: 7,
-    title: "Taipei 101 Branch renovatted until October",
-    type: "Branch",
-    publish_date: "2023 February 9",
-    date: "2023 October 9",
-    location: "Branch",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in enim in lectus eleifend maximus."
-  },
-]
-
 function BtnGroup({onChange}){
- const newsOptionItems = newsOptionData.map((item, index) => {
+ const newsOptionItems = newsOptionData.map((item) => {
     return(
       <>
       <input type="radio" className="news-input" name="news" id={item.id} value={item.id} defaultChecked={item.id === "all"} onChange={onChange}/>
-      <label htmlFor={item.id} className="news-label">{item.name}</label>
+      <label htmlFor={item.id} className="news-label cursor-pointer">{item.name}</label>
       </>
     )
   })
@@ -114,7 +50,7 @@ function NewsGroupList({data}) {
     return(
       <li className="news-item" key={item.id}>
         <a href="" className="news-item-title">{item.title}</a>
-        <p className="news-item-date">Published date: <span className="news-date">{item.publish_date}</span></p>
+        <p className="news-item-date">Event date: <span className="news-date">{item.event_date}</span></p>
       </li>
     )
   })
@@ -125,17 +61,69 @@ function NewsGroupList({data}) {
   )
 }
 
+export function NewsPopup(){
+  return(
+    <div className="popup-news">
+      <div className="popup-news-container">
+        <div className="popup-close cursor-pointer">&#x2716;</div>
+        <div className="popup-body">
+          <img src="https://picsum.photos/300/300?text=500" alt="" className="popup-img" />
+          <div className="popup-info-group">
+            <h5 className="popup-title second-title">Title</h5>
+            <div className="popup-info">
+              <p className="popup-event-date">Event Date: <span></span></p>
+              <p className="popup-publish-date">Publish Date: <span></span></p>
+              <p className="popup-location">Location: <span></span></p>
+              <div className="description-group">
+                <p className="description-title">Description</p>
+                <p className="description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in enim in lectus eleifend maximus.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function News() {
-  const [type, setType] = useState(dummyNewsData);
+  const [newsData, setNewData] = useState(dummyNewsData);
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const newsPerPage = 6
+  const lastIndex = currentPage * newsPerPage
+  const firstIndex = lastIndex - newsPerPage
+  const news = newsData.slice(firstIndex, lastIndex)
+  const npage = Math.ceil(newsData.length / newsPerPage)
+  const numbers = [...Array(npage + 1).keys()].slice(1)
+  
   const handleTypeChange = (e) => {
-    const newsType = dummyNewsData.filter(data => data.type.includes(e.target.value))
-
-    if(e.target.value === "all") return setType(dummyNewsData)
-    // console.log(newsType)
-    return setType(newsType)
+    const SortByTime = dummyNewsData.sort((a, b) => a.publish_date - b.publish_date)
+    if(e.target.value === "all"){
+      return setNewData(SortByTime)
+    } else{
+      const newsType = SortByTime.filter(data => data.type.toLowerCase().includes(e.target.value))
+      
+      return setNewData(newsType)
+    }
   }
+
+  const handlePrevClickPage = () => {
+    if(currentPage !== 1){
+      return setCurrentPage(currentPage - 1)
+    }
+  }
+  const handleNextClickPage = () => {
+    if(currentPage !== npage){
+      return setCurrentPage(currentPage + 1)
+    }
+  }
+  const handleActionPage = (id) => {
+    setCurrentPage(id)
+  }
+
   return(
     <section className="news">
       <div className="news-container">
@@ -143,10 +131,14 @@ export default function News() {
         <div className="news-body">
           <BtnGroup onChange={handleTypeChange}/>
           <div className="news-group">
-            <NewsGroupList data={type}/>
+            <NewsGroupList data={news}/>
+            <div className="pagination">
+              <Pagination data={numbers} onActive={handleActionPage} prevClick={handlePrevClickPage} nextClick={handleNextClickPage} currentPage={currentPage}/>
+            </div>
           </div>
         </div>
       </div>
+      {/* <NewsPopup/> */}
     </section>
   )
 }
