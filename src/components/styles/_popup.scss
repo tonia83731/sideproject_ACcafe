@@ -15,7 +15,10 @@
   .popup-news-container{
     padding: 1em 2em;
     .popup-close{
+      border: none;
+      background-color: transparent;
       text-align: end;
+      padding-left: 0;
       padding-bottom: 1em;
       @include font-adjust(1em, 700, var(--default-btn-bg));
       &:hover{

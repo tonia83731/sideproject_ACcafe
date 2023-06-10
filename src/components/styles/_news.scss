@@ -58,6 +58,9 @@
           background-color: var(--list-bg-hover);
         }
         .news-item-title{
+          border: none;
+          background-color:transparent;
+          padding-left: 0;
           font-family: 'Lora', serif;
           cursor: pointer;
           @include font-adjust(1.2rem, 700, var(--main-title));

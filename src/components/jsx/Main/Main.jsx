@@ -17,10 +17,6 @@ export default function Main(){
             <Route path="login" element={<Login/>}/>
           </Routes>
         </BrowserRouter>
-        {/* <Home/> */}
-        {/* <Menu/> */}
-        {/* <News/> */}
-        {/* <Login/> */}
       </div>
     </main>
   )
