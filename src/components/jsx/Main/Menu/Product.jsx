@@ -2,17 +2,18 @@ import {ReactComponent as Grid} from '../../../assets/icon/menu/grid.svg'
 import {ReactComponent as List} from '../../../assets/icon/menu/Vector.svg'
 import { UnorderList } from '../../Header'
 import {useState, useContext} from 'react'
-import { ProductMenu, ProductSearch, ProductData, MenuContext } from '../../Data/MenuData'
+import { ProductMenu, ProductSearch } from '../../Data/MenuData'
+
+import {dummyProductData} from '../../Data/ProductData'
 
 
 
 export default function Product() {
   const[mode, setMode] = useState('grid')
   const[searchValue, setSearchValue] = useState('')
-  const[showData, setShowData] = useState(ProductData)
+  const[showData, setShowData] = useState(dummyProductData)
   // const[itemQuantity, setItemQuantity] = useState(ProductData)
-  const MenuData = useContext(MenuContext)
-  const[quantityCounts, setQuantityCounts] = useState(MenuData)
+  const[quantityCounts, setQuantityCounts] = useState(dummyProductData)
 
   const [currentPage, setCurrentPage] = useState(1)
   const recordsPerPage = 4
@@ -34,7 +35,7 @@ export default function Product() {
     const filterData = showData.filter(item => item.name.toLowerCase().includes(searchValue))
     console.log(filterData)
     // if(filterData.length === 0) return
-    if(filterData.length === 0) return setShowData(ProductData)
+    if(filterData.length === 0) return setShowData(dummyProductData)
     setSearchValue('') 
     return setShowData(filterData)
   }

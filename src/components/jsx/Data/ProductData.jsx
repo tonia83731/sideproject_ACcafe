@@ -9,7 +9,7 @@ import nextId from "react-id-generator";
 
 
 
-const dummyProductData = [
+export const dummyProductData = [
   {
     id: nextId(),
     name: "Chocolate Fondant",
